@@ -10,7 +10,10 @@ export default {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.vue', '.js']
+    extensions: ['.ts', '.tsx', '.vue', '.js'],
+    alias: {
+      '@': 'src'
+    }
   },
   devServer: {
     compress: true,
