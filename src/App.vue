@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>{{ msg }}</p>
-    <label for="">
+    <label>
       Step:
       <input type="number" v-model="step">
     </label>
@@ -80,5 +80,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
+p {
+  font-weight: bold;
+}
 </style>
