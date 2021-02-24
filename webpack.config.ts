@@ -12,7 +12,7 @@ export default {
   resolve: {
     extensions: ['.ts', '.tsx', '.vue', '.js'],
     alias: {
-      '@': 'src'
+      '@': resolve('src')
     }
   },
   devServer: {

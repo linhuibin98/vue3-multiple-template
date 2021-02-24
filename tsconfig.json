@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es6",
     "strict": true,
     "sourceMap": true,
@@ -14,8 +15,12 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
+  "include": ["src/*"],
   "exclude": [
     "node_modules"
   ]

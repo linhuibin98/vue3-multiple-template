@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs } from 'vue'
-import LForm from './components/form/index.vue'
+import LForm from '@/components/form/index.vue'
 import LFormItem from './components/form-item/index.vue'
 import LInput from './components/input/index.vue'
 
