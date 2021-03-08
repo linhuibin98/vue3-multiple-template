@@ -54,7 +54,6 @@ export class MyPromise {
   then(onFulfilled: ResolveType, onRejected?: RejectType) {
     // 当 promise的状态为 pending
     if (this.isPending()) {
-      console.log('inner then1', 1)
       onFulfilled && this.resolveQueue.push(onFulfilled)
       onRejected && this.rejectQueue.push(onRejected)
     }
