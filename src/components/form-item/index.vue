@@ -3,9 +3,11 @@
     <label>
       <span v-if="label">{{ label }}</span>
       <slot></slot>
-      <div v-if="errorTips">
-        {{ errorTips }}
-      </div>
+      <slot name="error" v-if="errorTips" v-bind="{errorTips}">
+        <div>
+          {{ errorTips }}
+        </div>
+      </slot>
     </label>
   </div>
 </template>
@@ -33,7 +35,6 @@ export default {
         if (errors) {
           const targetError = errors.find(item => item.field === props.prop)
           errorTips.value = targetError?.message || ''
-          debugger
           return
         }
         // 没有错误

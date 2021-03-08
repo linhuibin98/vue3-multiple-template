@@ -12,9 +12,16 @@
     <l-form :form="form" :rules="rules">
       <l-form-item :label="'姓名'" prop="name">
         <l-input v-model:value="form.name" />
+        <template #error="{ errorTips }">
+          <p style="color: red;">{{ errorTips }}</p>
+        </template>
+        
       </l-form-item>
       <l-form-item :label="'手机号'" prop="phone">
         <l-input v-model:value="form.phone" />
+        <template #error="{ errorTips }">
+          <p style="color: green;">{{ errorTips }}</p>
+        </template>
       </l-form-item>
     </l-form>
 
