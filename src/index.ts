@@ -1,12 +1,8 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import Index from './views/Index.vue'
 
-import { curring } from '@/utils/curring'
+import { router } from './router'
 
-function add(a: number, b: number, c: number) {
-  return a + b + c
-}
-
-console.log('test curring', curring(add)(1)(2)(3))
-
-createApp(App).mount('#app')
+const app = createApp(Index)
+app.use(router)
+app.mount('#app')
