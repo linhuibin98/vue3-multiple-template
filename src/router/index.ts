@@ -10,10 +10,12 @@ export const routes: RouteRecordRaw[] = [
     children: [
       {
         path: 'home',
+        name: 'Home',
         component: () => import('@/App.vue')
       },
       {
         path: 'about',
+        name: 'About',
         component: () => import('@/views/About.vue')
       }
     ]
