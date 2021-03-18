@@ -17,6 +17,11 @@ export const routes: RouteRecordRaw[] = [
         path: 'about',
         name: 'About',
         component: () => import('@/views/About.vue')
+      },
+      {
+        path: 'drag',
+        name: 'Drag',
+        component: () => import('@/views/Drag.tsx')
       }
     ]
   }
