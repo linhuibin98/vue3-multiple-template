@@ -11,7 +11,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'home',
         name: 'Home',
-        component: () => import('@/App.vue')
+        component: () => import('@/views/Home.vue')
       },
       {
         path: 'about',
@@ -22,6 +22,11 @@ export const routes: RouteRecordRaw[] = [
         path: 'drag',
         name: 'Drag',
         component: () => import('@/views/Drag.tsx')
+      },
+      {
+        path: 'proxy',
+        name: 'Proxy',
+        component: () => import('@/views/Proxy.vue')
       }
     ]
   }

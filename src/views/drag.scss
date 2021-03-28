@@ -8,6 +8,17 @@
     position: absolute;
     width: 64px;
     height: 32px;
-    background-color: blue;
+    background-color: deepskyblue;
+    cursor: move;
+
+    &:focus &::before {
+      content: '';
+      border: 1px dashed red;
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5x;
+    }
   }
 }
