@@ -7,6 +7,7 @@
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
+    "module": "CommonJS",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -20,7 +21,7 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/*"],
+  "include": ["src/*", "./*.ts"],
   "exclude": [
     "node_modules"
   ]

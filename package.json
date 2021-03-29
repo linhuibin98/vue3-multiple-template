@@ -10,6 +10,12 @@
     "build": "webpack",
     "server": "ts-node server.ts"
   },
+  "dependencies": {
+    "async-validator": "^3.5.1",
+    "mitt": "^2.1.0",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.4"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@types/html-webpack-plugin": "^3.2.4",
@@ -33,11 +39,5 @@
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.7.3"
-  },
-  "dependencies": {
-    "async-validator": "^3.5.1",
-    "mitt": "^2.1.0",
-    "vue": "^3.0.5",
-    "vue-router": "^4.0.4"
   }
 }

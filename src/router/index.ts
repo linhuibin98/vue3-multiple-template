@@ -32,6 +32,11 @@ export const routes: RouteRecordRaw[] = [
         path: 'gesture',
         name: 'Gesture',
         component: () => import('@/views/Gesture.vue')
+      },
+      {
+        path: 'animation',
+        name: 'animation',
+        component: () => import('@/views/Animation.vue')
       }
     ]
   }
