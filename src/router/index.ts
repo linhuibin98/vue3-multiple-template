@@ -27,6 +27,11 @@ export const routes: RouteRecordRaw[] = [
         path: 'proxy',
         name: 'Proxy',
         component: () => import('@/views/Proxy.vue')
+      },
+      {
+        path: 'gesture',
+        name: 'Gesture',
+        component: () => import('@/views/Gesture.vue')
       }
     ]
   }
