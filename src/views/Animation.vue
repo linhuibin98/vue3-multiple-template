@@ -2,6 +2,10 @@
   <div class="animation">
     <div ref="animateRef" class="animation-item"></div>
   </div>
+  <div class="ani-top">
+    <button @click="pause">暂停</button>
+    <button @click="resume">恢复</button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -11,6 +15,9 @@ import { Timeline, Animation } from "@/utils/animation";
 export default defineComponent({
   setup() {
     const animateRef = ref({} as HTMLDivElement)
+    const timeline = new Timeline()
+
+
     onMounted(() => {
       const animateEl = animateRef.value
       const animation = new Animation(
@@ -19,15 +26,20 @@ export default defineComponent({
           v => `translateX(${v}px)`,
           0,
           200,
-          5000,
-          5000
+          2000,
+          0
       )
-      const timeline = new Timeline()
+
       timeline.add(animation)
       timeline.start()
     })
+
+    const pause = () => timeline.pause()
+    const resume = () => timeline.resume()
     return {
-      animateRef
+      animateRef,
+      pause,
+      resume
     }
   }
 })
