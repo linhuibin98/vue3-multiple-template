@@ -1,0 +1,1 @@
+export  const isUndef = (val: any) => typeof val === 'undefined'
