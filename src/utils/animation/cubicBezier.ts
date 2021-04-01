@@ -65,3 +65,4 @@ export const easeIn = cubicBezier(.42, 0, 1, 1)
 export const easeOut = cubicBezier(0, 0, .58, 1)
 export const easeInOut = cubicBezier(.42, 0, .58, 1)
 export const liner = cubicBezier(0, 0, 1, 1)
+export const linear = (t: number) => t

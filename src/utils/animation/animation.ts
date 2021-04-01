@@ -11,7 +11,7 @@
 *
 *   requestAnimationFrame
 * */
-import {defaultTimingFunction} from './timingFunction'
+import {linear} from './cubicBezier'
 import { isUndef } from "./utils"
 
 export type StatusType = 'pending' | 'playing' | 'paused'
@@ -146,7 +146,7 @@ export class Animation {
       end: number,
       duration: number = 0,
       delay: number = 0,
-      timingFunction: (t: number) => number = defaultTimingFunction.linear, // t 表示时间百分比
+      timingFunction: (t: number) => number = linear // t 表示时间百分比
   ) {
     this.object = object
     this.property = property
@@ -189,7 +189,7 @@ export class ColorAnimation {
       end: ColorType,
       duration: number = 0,
       delay: number = 0,
-      timingFunction: (t: number) => number = defaultTimingFunction.linear, // t 表示时间百分比
+      timingFunction: (t: number) => number = linear, // t 表示时间百分比
       template = (v: ColorType) => `rgba(${v.r}, ${v.g}, ${v.b}, ${v.a})`,
   ) {
     this.object = object
