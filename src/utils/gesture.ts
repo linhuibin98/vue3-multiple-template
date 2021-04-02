@@ -14,13 +14,31 @@ export interface Context {
   moves: Move[]                   // 保存 move事件时，移动距离，和时间，最后用于判断是否为 flick事件
 }
 
-export type EventName = 'tapstart' | 'tapend' | 'panstart' | 'panmove' | 'panend' | 'pressstart' | 'pressend' | 'presscancel' | 'cancel'
 export interface GestureEvent extends Event {
   startX: number,
   startY: number,
   clientX: number,
   clientY: number,
   gestureType: string,
+}
+
+interface GestureEventMap extends HTMLElementEventMap {
+  "tapstart": GestureEvent;
+  "tapend": GestureEvent;
+  "panstart": GestureEvent;
+  "panmove": GestureEvent;
+  "panend": GestureEvent;
+  "pressstart": GestureEvent;
+  "pressend": GestureEvent;
+  "presscancel": GestureEvent;
+  "cancel": GestureEvent;
+}
+
+export type EventName = keyof GestureEventMap
+
+export interface GestureElement extends HTMLElement {
+  addEventListener<K extends keyof HTMLElementEventMap | EventName>(type: K, listener: (this: HTMLElement, ev: GestureEventMap[K] ) => any, options?: boolean | AddEventListenerOptions): void;
+  removeEventListener<K extends keyof HTMLElementEventMap | EventName>(type: K, listener: (this: HTMLElement, ev: GestureEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
 }
 
 /*
@@ -276,6 +294,8 @@ export function enableGesture(element: HTMLElement = document.body) {
     })
     clearContextTimeout(context)
   }
+
+  return element as GestureElement
 }
 
 

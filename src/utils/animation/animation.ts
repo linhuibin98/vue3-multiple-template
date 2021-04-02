@@ -17,10 +17,12 @@ import { isUndef } from "./utils"
 export type StatusType = 'pending' | 'playing' | 'paused'
 
 export class Timeline {
-  animations: Array<Animation | ColorAnimation>         // 动画队列
+  animations: Set<Animation | ColorAnimation> = new Set()        // 动画队列
+  finishedAnimations: Set<Animation | ColorAnimation> = new Set()       // 完成的动画队列
   startTime: number = 0             // start开始执行时间
   requestId: null | number = null   // requestAnimationFrame返回的 ID
   pauseTime: number = 0             // 暂停时的时间
+  addTimes: Map<Animation | ColorAnimation, number> = new Map()
   status: StatusType = 'pending'                   // 动画执行状态
   /*
   *  动画执行帧 requestAnimationFrame
@@ -28,33 +30,35 @@ export class Timeline {
   tick: () => void
 
   constructor() {
-    this.animations = []
+    this.animations = new Set()
     this.tick = () => {
       const t = Date.now() - this.startTime
-      const animations = this.animations.filter(ani => !ani.finished)
-      for (const animation of animations) {
-        const { object, property, delay, timingFunction, template, duration, addTime } = animation
-        if (t < delay) { // delay 之后再执行 动画
+      for (const animation of this.animations) {
+        const { object, property, delay, timingFunction, template, duration } = animation
+        const addTime = this.addTimes.get(animation) || 0
+        if (t < delay + addTime!) { // delay 之后再执行 动画
           continue
         }
         // progression, 0~1之间的数，由timingFunction得到当前动画的进度
         let progression = timingFunction((t - delay - addTime!) / duration)
         if (t > duration + delay + addTime!) {
           progression = 1   // progression最大值为1
-          animation.finished = true
+          this.animations.delete(animation)
+          this.finishedAnimations.add(animation)
         }
         // 计算当前帧，计算value
         const value = animation.valueFromProgression(progression)
-        console.log(property, value)
+        // console.log(property, value)
         // @ts-ignore
         object[property] = template(value)
       }
       /*
       *  优化： 当animations 不为空时 才执行下一帧
       * */
-      if (animations.length > 0) {
-        this.requestId = requestAnimationFrame(this.tick)
-      }
+      // if (this.animations.size > 0) {
+      //   this.requestId = requestAnimationFrame(this.tick)
+      // }
+      this.requestId = requestAnimationFrame(this.tick)
     }
   }
 
@@ -100,15 +104,27 @@ export class Timeline {
   *  重新执行动画
   * */
   restart() {
-    if (this.status === 'playing') {
-      this.pause()
+    this.pause()
+    for (const ani of this.finishedAnimations) {
+      this.animations.add(ani)
     }
-    this.animations = []
     this.requestId = null
     this.status = 'playing'
     this.startTime = Date.now()
     this.pauseTime = 0
     this.tick()
+  }
+  /*
+  *  清空时间线 timeline
+  * */
+  reset() {
+    this.pause()
+    this.status = 'pending'
+    this.animations = new Set()
+    this.finishedAnimations = new Set()
+    this.addTimes = new Map()
+    this.pauseTime = 0
+    this.requestId = 0
   }
   /*
   *  向动画队列中 添加动画
@@ -117,13 +133,17 @@ export class Timeline {
     if (!animation) {
       return
     }
-    animation.finished = false
+    let addTimeRes = 0
     if (this.status === 'playing') {
-      animation.addTime = isUndef(addTime) ? Date.now() - this.startTime : addTime
+      addTimeRes = isUndef(addTime) ? Date.now() - this.startTime : addTime as number
     } else {
-      animation.addTime = isUndef(addTime) ? 0 : addTime
+      addTimeRes = isUndef(addTime) ? 0 : addTime as number
     }
-    this.animations.push(animation)
+    this.addTimes.set(animation, addTimeRes)
+    this.animations.add(animation)
+    if (this.status === 'playing' && this.requestId === null) {
+      this.tick()
+    }
   }
 }
 
@@ -136,8 +156,6 @@ export class Animation {
   duration: number
   delay: number
   timingFunction: (t: number) => number  // t 表示时间百分比
-  finished?: boolean    // 是否完成动画，用于过滤动画队列，提升性能
-  addTime?: number     // 保存 animation加入 timeline 的时间戳
   constructor(
       object: Record<any, any>,
       property: string,
