@@ -137,7 +137,7 @@ export class Carousel {
 
       const currentAnimation = new Animation(currentItem.style, 'transform', (v) => `translateX(${v}px)`, currentOffset + dx, -500 * current + 500 * direction, 300)
       const nextAnimation = new Animation(nextItem.style, 'transform', (v) => `translateX(${v}px)`, nextOffset + dx, -500 * next + 500 + 500 * direction, 300)
-      const prevAnimation = new Animation(prevItem.style, 'transform', (v) => `translateX(${v}px)`, prevOffset + dx, -500 -500 * prev + 500 * direction, 300)
+      const prevAnimation = new Animation(prevItem.style, 'transform', (v) => `translateX(${v}px)`, prevOffset + dx, -500 * prev -500  + 500 * direction, 300)
       this.timeline.add(currentAnimation)
       this.timeline.add(nextAnimation)
       this.timeline.add(prevAnimation)

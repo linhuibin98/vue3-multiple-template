@@ -42,6 +42,11 @@ export const routes: RouteRecordRaw[] = [
         path: 'carousel',
         name: 'Carousel',
         component: () => import('@/views/Carousel.vue')
+      },
+      {
+        path: 'upload',
+        name: 'Upload',
+        component: () => import('@/views/Upload.vue')
       }
     ]
   }

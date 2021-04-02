@@ -1,12 +1,13 @@
 <template>
   <div class="route">
-    <router-link to="/home">首页</router-link>
-    <router-link to="/drag">拖拽</router-link>
-    <router-link to="/about">关于</router-link>
+    <router-link to="/home">Home</router-link>
+    <router-link to="/drag">Drag</router-link>
+    <router-link to="/about">About</router-link>
     <router-link to="/proxy">Proxy</router-link>
     <router-link to="/gesture">Gesture</router-link>
     <router-link to="/animation">Animation</router-link>
     <router-link to="/carousel">Carousel</router-link>
+    <router-link to="/upload">Upload</router-link>
   </div>
   <router-view></router-view>
 </template>

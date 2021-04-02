@@ -17,7 +17,9 @@ export default {
   },
   devServer: {
     compress: true,
-    port: 8080
+    port: 8080,
+    inline: true,
+    hot: true,
   },
   module: {
     rules: [
