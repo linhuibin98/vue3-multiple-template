@@ -23,6 +23,8 @@ export interface GestureEvent extends Event {
 }
 
 interface GestureEventMap extends HTMLElementEventMap {
+  "start": GestureEvent;
+  "end": GestureEvent;
   "tapstart": GestureEvent;
   "tapend": GestureEvent;
   "panstart": GestureEvent;
@@ -77,9 +79,9 @@ export function enableGesture(element: HTMLElement = document.body) {
   /*
   *  禁用一些默认事件
   * */
-  window.addEventListener('contextmenu', (e: MouseEvent) => {
-    e.preventDefault()
-  })
+  // window.addEventListener('contextmenu', (e: MouseEvent) => {
+  //   e.preventDefault()
+  // })
 
   document.addEventListener('selectstart', (e: Event) => {
     e.preventDefault()
@@ -197,6 +199,11 @@ export function enableGesture(element: HTMLElement = document.body) {
 
     // 派发事件
     dispatchEvent({
+      name: 'start',
+      context,
+      point
+    })
+    dispatchEvent({
       name: 'tapstart',
       context,
       point
@@ -250,6 +257,11 @@ export function enableGesture(element: HTMLElement = document.body) {
     // 点击
     if (isTap(context)) {
       dispatchEvent({
+        name: 'end',
+        context,
+        point
+      })
+      dispatchEvent({
         name: 'tapend',
         context,
         point
@@ -269,6 +281,11 @@ export function enableGesture(element: HTMLElement = document.body) {
         }
       }
       dispatchEvent({
+        name: 'end',
+        context,
+        point
+      })
+      dispatchEvent({
         name: 'panend',
         context,
         point
@@ -277,6 +294,11 @@ export function enableGesture(element: HTMLElement = document.body) {
 
     // 常按
     if (isPress(context)) {
+      dispatchEvent({
+        name: 'end',
+        context,
+        point
+      })
       dispatchEvent({
         name: 'pressend',
         context,

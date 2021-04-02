@@ -66,13 +66,9 @@ export class Carousel {
     let nextItem = {} as HTMLImageElement
     let prev = 0
     let prevItem = {} as HTMLImageElement
-    let timeoutIDs: Timeout[] = []
-    let startTransform = {
-      current: 0,
-      next: 0,
-      prev: 0
-    }
-    const matrixReg = /matrix\(\d, \d, \d, \d, (-?\d+), \d\)/
+    let timeoutID: Timeout | null = null
+    let offset = 0
+    const transformReg = /translateX\((-?\d+\.?\d+?)px\)/
 
     const setCurrent = (val: number) => {
       current = val
@@ -85,27 +81,28 @@ export class Carousel {
 
     setCurrent(0)
 
-
-    this.root.addEventListener('tapstart', (e: GestureEvent) => {
-      closeAutoPlay()
+    let currentOffset = 0
+    let prevOffset = 0
+    let nextOffset = 0
+    this.root.addEventListener('start', (e: GestureEvent) => {
       this.timeline.reset()
-      this.timeline.start()
+      closeAutoPlay()
       console.log(prev, current, next)
-      const prevAnimation = new Animation(prevItem.style, 'transform', (v) => `translateX(${v}px)`, 0, -500 * prev - 500)
-      const currentAnimation = new Animation(currentItem.style, 'transform', (v) => `translateX(${v}px)`, 0, -500 * current)
-      const nextAnimation = new Animation(nextItem.style, 'transform', (v) => `translateX(${v}px)`, 0, 500 - 500 * next)
-      this.timeline.add(prevAnimation)
-      this.timeline.add(currentAnimation)
-      this.timeline.add(nextAnimation)
-      setTimeout(() => {
-        const { transform: currentTranValue } = getComputedStyle(currentItem)
-        const { transform: nextTranValue } = getComputedStyle(nextItem)
-        const { transform: prevTranValue } = getComputedStyle(prevItem)
-        startTransform.prev = parseFloat(prevTranValue.match(matrixReg)?.[1] || '0')
-        startTransform.current = parseFloat(currentTranValue.match(matrixReg)?.[1] || '0')
-        startTransform.next = parseFloat(nextTranValue.match(matrixReg)?.[1] || '0')
-      }, 16)
+      const {transform} = currentItem.style
+      console.log('transform===', transform)
+      console.log('transform.match(transformReg)', transform.match(transformReg))
+      const currentTransformValue = parseFloat(transform.match(transformReg)?.[1] || '0')
+      console.log('currentTransformValue', currentTransformValue)
+      offset = currentTransformValue + 500 * current
+      console.log('offset', offset)
+      currentOffset = -500 * current + offset
+      prevOffset = -500 - 500 * prev + offset
+      nextOffset = 500 - 500 * next + offset
+      console.log('currentOffset', currentOffset)
+      console.log('prevOffset', prevOffset)
+      console.log('nextOffset', nextOffset)
     })
+
     this.root.addEventListener('panmove', (e: GestureEvent) => {
       let dx = e.clientX - e.startX
       // 处理 滑动超过一屏
@@ -114,49 +111,39 @@ export class Carousel {
       } else if (-dx > 500) {
         dx = -500
       }
-      prevItem.style.transform = `translateX(${dx + startTransform.prev}px)`
-      currentItem.style.transform = `translateX(${dx + startTransform.current}px)`
-      nextItem.style.transform = `translateX(${dx + startTransform.next}px)`
+      currentItem.style.transform = `translateX(${currentOffset + dx}px)`
+      prevItem.style.transform = `translateX(${prevOffset + dx}px)`
+      nextItem.style.transform = `translateX(${nextOffset + dx}px)`
     })
-    this.root.addEventListener('panend', (e: GestureEvent) => {
+
+    this.root.addEventListener('end', (e: GestureEvent) => {
+      let direction = 0
       let dx = e.clientX - e.startX
-      // 处理 滑动超过一屏
-      if (dx > 500) {
-        dx = 500
-      } else if (-dx > 500) {
-        dx = -500
+
+      if (dx + offset > 500 / 3) { // 右滑
+        direction = 1
+      } else if (dx + offset < -500 / 3) {  // 左滑
+        direction = -1
       }
 
-      if (dx > 500 / 3) { // 右滑
-        const currentAnimation = new Animation(currentItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.current, -500 * current + 500, 300)
-        const nextAnimation = new Animation(nextItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.next, -500 * next + 500, 300)
-        const prevAnimation = new Animation(prevItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.prev, -500 * prev, 300)
-        this.timeline.add(currentAnimation)
-        this.timeline.add(nextAnimation)
-        this.timeline.add(prevAnimation)
-        setCurrent(prev)
-      } else if (-dx > 500 / 3) {  // 左滑
-        const currentAnimation = new Animation(currentItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.current, -500 * current - 500, 300)
-        const nextAnimation = new Animation(nextItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.next, -500 * next, 300)
-        const prevAnimation = new Animation(prevItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.prev, -500 * prev - 500 - 500, 300)
-        this.timeline.add(currentAnimation)
-        this.timeline.add(nextAnimation)
-        this.timeline.add(prevAnimation)
-        setCurrent(next)
-      } else {
-        const currentAnimation = new Animation(currentItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.current, -500 * current, 300)
-        const nextAnimation = new Animation(nextItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.next, -500 * next + 500, 300)
-        const prevAnimation = new Animation(prevItem.style, 'transform', (v) => `translateX(${v}px)`, dx + startTransform.prev, -500 * prev - 500, 300)
-        this.timeline.add(currentAnimation)
-        this.timeline.add(nextAnimation)
-        this.timeline.add(prevAnimation)
+      if (dx + offset > 500) {
+        dx = 500 - offset
+      } else if (dx + offset < -500) {
+        dx = -500 - offset
       }
-      timeoutIDs.push(openAutoPlay())
+
+      console.log('direction', direction)
+      this.timeline.start()
+
+      const currentAnimation = new Animation(currentItem.style, 'transform', (v) => `translateX(${v}px)`, currentOffset + dx, -500 * current + 500 * direction, 300)
+      const nextAnimation = new Animation(nextItem.style, 'transform', (v) => `translateX(${v}px)`, nextOffset + dx, -500 * next + 500 + 500 * direction, 300)
+      const prevAnimation = new Animation(prevItem.style, 'transform', (v) => `translateX(${v}px)`, prevOffset + dx, -500 -500 * prev + 500 * direction, 300)
+      this.timeline.add(currentAnimation)
+      this.timeline.add(nextAnimation)
+      this.timeline.add(prevAnimation)
+      setCurrent((current - direction + this.data.length) % this.data.length)
+      openAutoPlay()
     })
-    // this.root.addEventListener('tapend', (e: GestureEvent) => {
-    //   this.timeline.restart()
-    //   openAutoPlay()
-    // })
 
     /* 轮播 */
     this.timeline.start()
@@ -181,18 +168,18 @@ export class Carousel {
       *   此时需要过渡动画
       * */
       setTimeout(() => {
-        const currentAnimation = new Animation(currentItem.style, 'transform', (v) => `translateX(${v}px)`,-500 * current, -500 - 500 * current, 1000)
-        const nextAnimation = new Animation(nextItem.style, 'transform', (v) => `translateX(${v}px)`, 500 - 500 * next, -500 * next, 1000)
+        const currentAnimation = new Animation(currentItem.style, 'transform', (v) => `translateX(${v}px)`, -500 * current, -500 - 500 * current, 600)
+        const nextAnimation = new Animation(nextItem.style, 'transform', (v) => `translateX(${v}px)`, 500 - 500 * next, -500 * next, 600)
         this.timeline.add(currentAnimation)
         this.timeline.add(nextAnimation)
         setCurrent(next)
       }, 16)
-      timeoutIDs.push(setTimeout(nextPic, 3000))
+      timeoutID = setTimeout(nextPic, 3000)
     }
-    const openAutoPlay = () => timeoutIDs.length === 0 && setTimeout(nextPic, 3000)
+    const openAutoPlay = () => timeoutID === null && (timeoutID = setTimeout(nextPic, 3000))
     const closeAutoPlay = () => {
-      timeoutIDs.forEach(id => clearTimeout(id))
-      timeoutIDs = []
+      timeoutID && clearTimeout(timeoutID)
+      timeoutID = null
     }
 
 
@@ -209,6 +196,6 @@ export class Carousel {
     }
 
     nodeEl.appendChild(this.root)
-    // timeoutIDs.push(openAutoPlay())
+    openAutoPlay()
   }
 }
