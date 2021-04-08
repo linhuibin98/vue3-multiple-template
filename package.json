@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
+    "@babel/plugin-transform-react-jsx": "^7.13.12",
     "@types/html-webpack-plugin": "^3.2.4",
     "@types/node": "^14.14.27",
     "@types/webpack": "^4.41.26",

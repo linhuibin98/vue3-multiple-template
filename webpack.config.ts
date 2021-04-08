@@ -30,7 +30,7 @@ export default {
       {
         test: /\.js$/,
         // loader: './src/loaders/loader1.js'  // 自定义loader
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.tsx?$/,
