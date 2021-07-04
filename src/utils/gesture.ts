@@ -79,19 +79,21 @@ export function enableGesture(element: HTMLElement = document.body) {
   /*
   *  禁用一些默认事件
   * */
+ // 禁止鼠标 右键 功能
   // window.addEventListener('contextmenu', (e: MouseEvent) => {
   //   e.preventDefault()
   // })
 
+  // 禁止文本选中
   document.addEventListener('selectstart', (e: Event) => {
     e.preventDefault()
   })
-
+  // 禁止双击 文本选中 
   document.addEventListener('dblclick', (e: Event) => {
     e.stopPropagation()
     e.preventDefault()
   })
-
+  // 禁止移动端 右滑返回上一页默认事件
   document.addEventListener('touchmove', (e: TouchEvent) => {
     e.preventDefault()
   }, {passive: false})

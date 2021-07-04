@@ -47,6 +47,11 @@ export const routes: RouteRecordRaw[] = [
         path: 'upload',
         name: 'Upload',
         component: () => import('@/views/Upload.vue')
+      },
+      {
+        path: 'directive',
+        name: 'Directive',
+        component: () => import('@/views/Directive.vue')
       }
     ]
   }

@@ -20,9 +20,24 @@ export default {
     port: 8080,
     inline: true,
     hot: true,
+    disableHostCheck: true,
   },
   module: {
     rules: [
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: [
+        //     {
+        //   loader: 'url-loader',
+        //   options: {
+        //     limit: 2 * 1024, // 小于2k的图片，直接使用Base64编码进行处理
+        //     outputPath: '/image/'
+        //   }
+        // },
+          {
+          loader: 'file-loader',
+        }]
+      },
       {
         test: /\.vue$/,
         use: 'vue-loader'
