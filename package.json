@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "async-validator": "^3.5.1",
+    "exceljs": "^4.2.1",
     "mitt": "^2.1.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.4"
