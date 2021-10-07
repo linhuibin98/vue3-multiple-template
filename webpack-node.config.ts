@@ -4,10 +4,10 @@ import ProgressBarPlugin from "progress-bar-webpack-plugin";
 
 export default {
   mode: 'development',
-  entry: './src/test.js',
+  entry: './src/vue.ts',
   output: {
     path: path.join(__dirname, 'dest'),
-    filename: '[name]-[hash:8].js'
+    filename: 'main.js'
   },
   plugins: [
     new ProgressBarPlugin({
