@@ -41,11 +41,11 @@ function findInfoByName(filePath: string, outputPath = "output.xlsx") {
     .then(() => workbook.getWorksheet("总名录"))
     .then(async (NameSheet) => {
       const count = NameSheet.rowCount;
-      for (let i = 210; i <= count; i++) {
+      for (let i = 34; i <= count; i++) {
         const cell = NameSheet.getCell(`A${i}`);
         console.log(`当前进度：${i}/${count - 1}`);
         console.log(`种名：${cell.text}`);
-        let htmlResponse;
+        let htmlResponse: any;
         try {
           htmlResponse = await axios.get(`http://plantplus.cn/info/${encodeURIComponent(cell.text)}`);
         } catch {
@@ -57,18 +57,33 @@ function findInfoByName(filePath: string, outputPath = "output.xlsx") {
           if (id) {
             const lmatch = ((htmlResponse?.data || "") as string).match(/var latin2 = '(.+)'/);
             const lname = lmatch?.[1] || '';
-            let classifyRes;
+
+            let infoRes: any;
+
+            if (lname) {
+              try {
+                infoRes = await axios.get(`http://www.iplant.cn/ashx/getfrps.ashx?key=${lname}&m=${Math.random()}`);
+              } catch {
+                //
+              }
+            }
+
+            if (infoRes?.status === 200) {
+              const xlname = infoRes?.data?.frpsl || '';
+              // 拉丁学名
+              const lcell = NameSheet.getCell(`C${i}`);
+              lcell && (lcell.value = xlname);
+              console.log(`拉丁学名：${xlname}`);
+            }
+
+            let classifyRes: any;
             try {
-              classifyRes = await axios.get(`http://plantplus.cn/ashx/getclasssys.ashx?spid=${id}`);
+              classifyRes = await axios.get(`http://www.iplant.cn/ashx/getclasssys.ashx?spid=${id}`);
             } catch {
-              continue;
+              //
             }
             if (classifyRes?.status === 200) {
               const classData = classifyRes.data as any;
-              // 拉丁学名
-              const lcell = NameSheet.getCell(`C${i}`);
-              lcell && (lcell.value = lname);
-              console.log(`拉丁学名：${lname}`);
               // 科名
               const kcell = NameSheet.getCell(`D${i}`);
               kcell && (kcell.value = classData.famctxt);
@@ -85,8 +100,9 @@ function findInfoByName(filePath: string, outputPath = "output.xlsx") {
               const slcell = NameSheet.getCell(`G${i}`);
               slcell && (slcell.value = classData.genl);
               console.log(`属拉丁名：${classData.genl}`);
-              await workbook.xlsx.writeFile(outputPath);
             }
+
+            await workbook.xlsx.writeFile(outputPath);
           }
         }
       }
