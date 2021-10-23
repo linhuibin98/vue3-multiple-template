@@ -11,17 +11,23 @@
     "server": "ts-node server.ts"
   },
   "dependencies": {
+    "@types/babel-traverse": "^6.25.7",
     "async-validator": "^3.5.1",
     "axios": "^0.22.0",
     "cheerio": "^1.0.0-rc.10",
     "exceljs": "^4.2.1",
+    "mathjs": "^9.5.1",
     "mitt": "^2.1.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
+    "@babel/parser": "^7.15.8",
     "@babel/plugin-transform-react-jsx": "^7.13.12",
+    "@babel/traverse": "^7.15.4",
+    "@babel/types": "^7.15.6",
+    "@types/babel__traverse": "^7.14.2",
     "@types/fs-extra": "^9.0.10",
     "@types/html-webpack-plugin": "^3.2.4",
     "@types/memory-fs": "^0.3.3",
@@ -31,7 +37,7 @@
     "@types/webpack": "^4.41.26",
     "@types/webpack-dev-server": "^3.11.1",
     "@vue/babel-preset-app": "^4.5.11",
-    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/compiler-sfc": "^3.2.20",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.2",
     "express": "^4.17.1",
