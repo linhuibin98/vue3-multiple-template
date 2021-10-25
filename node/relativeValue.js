@@ -51,7 +51,7 @@ async function main() {
             result[plot].allTotal += abundance;
             result[plot][name].TotalNum += abundance;
             // 截面
-            const rv = Math.pow(d/2, 2) * Math.PI;
+            const rv = Math.pow(d/2, 2) * Math.PI * parseInt(abundance);
             result[plot][name].basalArea += rv;
             result[plot].allBasalArea += rv;
             //
