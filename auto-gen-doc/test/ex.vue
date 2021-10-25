@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// 这是一个组件
 export default {
     name: 'Ex',
 

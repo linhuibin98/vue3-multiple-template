@@ -1,0 +1,13 @@
+{
+  "title": "string",
+  "description": "string",
+  "props": [
+    {
+      "name": "string",
+      "description": "string",
+      "type": "string",
+      "required": "boolean",
+      "default": "type"
+    }
+  ]
+}

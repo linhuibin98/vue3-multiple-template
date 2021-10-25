@@ -3,7 +3,7 @@ const fs = require('fs/promises');
 const babelParser = require('@babel/parser');
 const vueCompilerSFC = require('@vue/compiler-sfc');
 
-fs.readFile('./ex.vue', 'utf-8').then(text => {
+fs.readFile('./test/ex.vue', 'utf-8').then(text => {
     const sfcParseContent = vueCompilerSFC.parse(text);
     if (sfcParseContent.errors.length) {
         console.log('vueCompilerSFC：解析出错', sfcParseContent.errors[0]);

@@ -11,7 +11,13 @@ const babelTraverse = require("@babel/traverse").default;
 
 const md = {
   title: '',
-  props: ''
+  description: '',
+  props: [
+    {
+      name: '',
+      description: ''
+    }
+  ]
 };
 
 async function main() {
