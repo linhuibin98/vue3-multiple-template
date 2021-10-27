@@ -14,9 +14,9 @@ function autoPromiseCatch(babel, opts) {
         }
 
         if (
+          // types.isThisExpression(node.callee.object) &&
           !(
             types.isMemberExpression(node.callee) &&
-            types.isThisExpression(node.callee.object) &&
             types.isIdentifier(node.callee.property) &&
             promiseNames.includes(node.callee.property.name)
           )

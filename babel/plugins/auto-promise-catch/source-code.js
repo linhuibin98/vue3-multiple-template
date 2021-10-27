@@ -16,6 +16,6 @@
 //     content: '这是一个弹窗'
 // }).then(() => {}).catch(e => e);
 
-this.$modal({
+util.pop.$modal({
     content: '这是一个弹窗'
 }).then(() => {}).then(() => {});
