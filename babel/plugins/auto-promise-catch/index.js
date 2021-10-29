@@ -1,6 +1,6 @@
-const babelParser = require("@babel/parser");
+const babelParser = require('@babel/parser');
 const autoPromiseCatch = require('./auto-promise-catch');
-const { transformFromAstSync } = require('@babel/core');
+const {transformFromAstSync} = require('@babel/core');
 const fs = require('fs/promises');
 
 async function main() {
@@ -10,7 +10,7 @@ async function main() {
         sourceType: 'unambiguous'
     });
 
-    const { code } = transformFromAstSync(ast, sourceCode, {
+    const {code} = transformFromAstSync(ast, sourceCode, {
         plugins: [autoPromiseCatch],
         filename: './source-code.js'
     });
