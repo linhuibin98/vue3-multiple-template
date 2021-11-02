@@ -19,7 +19,8 @@
     ],
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["element-plus/global"]
   },
   "include": ["src/*", "./*.ts"],
   "exclude": [

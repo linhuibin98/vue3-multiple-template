@@ -1,76 +1,119 @@
-import { join, resolve } from 'path'
-import HtmlWebpackPlugin  from 'html-webpack-plugin'
-import { VueLoaderPlugin } from 'vue-loader'
+import { join, resolve } from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import { VueLoaderPlugin } from "vue-loader";
+import webpack from "webpack";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import CompressionPlugin from "compression-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 export default {
-  mode: 'development',
-  entry: './src/index.ts',
+  mode: "development",
+  entry: "./src/index.ts",
   output: {
-    path: join(__dirname, 'dist'),
-    filename: '[name].js'
+    path: join(__dirname, "dist"),
+    filename: "[name].[chunkhash].js",
+    // 增加chunkFilename
+    chunkFilename: "[name].[contenthash].js",
+  },
+  devtool: "inline-source-map",
+  // 使用splitChunks默认策略拆包，同时提取runtime
+  optimization: {
+    moduleIds: "hashed",
+    runtimeChunk: true,
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+        default: {
+          chunks: 'initial',
+          minChunks: 2,
+        },
+      },
+    },
+    minimizer: [
+      // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
+      // `...`,
+      new CssMinimizerPlugin(),
+    ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.vue', '.js'],
+    extensions: [".ts", ".tsx", ".vue", ".js"],
     alias: {
-      '@': resolve('src')
-    }
+      "@": resolve("src"),
+    },
   },
   devServer: {
-    compress: true,
+    compress: false,
     port: 8080,
     inline: true,
     hot: true,
-    disableHostCheck: true,
   },
   module: {
     rules: [
       {
         test: /\.(png|jpg|jpeg|gif)$/,
         use: [
-        //     {
-        //   loader: 'url-loader',
-        //   options: {
-        //     limit: 2 * 1024, // 小于2k的图片，直接使用Base64编码进行处理
-        //     outputPath: '/image/'
-        //   }
-        // },
           {
-          loader: 'file-loader',
-        }]
+            loader: "url-loader",
+            options: {
+              limit: 2 * 1024, // 小于2k的图片，直接使用Base64编码进行处理
+              outputPath: "/image/",
+            },
+          },
+          {
+            loader: "file-loader",
+          },
+        ],
       },
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        use: "vue-loader",
       },
       {
         test: /\.js$/,
         // loader: './src/loaders/loader1.js'  // 自定义loader
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
       {
         test: /\.tsx?$/,
         use: [
-          'babel-loader',
+          "babel-loader",
           {
-            loader: 'ts-loader',
+            loader: "ts-loader",
             options: {
               transpileOnly: true, // 编译时不类型检查
-              appendTsSuffixTo: [/\.vue$/]
-            }
-          }
-        ]
+              appendTsSuffixTo: [/\.vue$/],
+            },
+          },
+        ],
       },
       {
         test: /\.(css|scss|sass)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      }
-    ]
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          "css-loader",
+          "sass-loader",
+        ],
+      },
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: resolve(__dirname, 'public/index.html')
+    new webpack.ProgressPlugin(),
+    new CleanWebpackPlugin(),
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[name].[contenthash].css",
     }),
-    new VueLoaderPlugin()
-  ]
-}
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: resolve(__dirname, "public/index.html"),
+    }),
+    // 打包后文件压缩插件
+    new CompressionPlugin(),
+  ],
+};

@@ -21,7 +21,7 @@ export const routes: RouteRecordRaw[] = [
       {
         path: 'drag',
         name: 'Drag',
-        component: () => import('@/views/Drag.tsx')
+        component: () => import('@/views/Drag')
       },
       {
         path: 'proxy',
