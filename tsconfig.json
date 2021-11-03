@@ -22,7 +22,7 @@
     },
     "types": ["element-plus/global"]
   },
-  "include": ["src/*", "./*.ts"],
+  "include": ["src/*", "./*.ts", "test-env.js"],
   "exclude": [
     "node_modules"
   ]
