@@ -52,6 +52,11 @@ export const routes: RouteRecordRaw[] = [
         path: 'directive',
         name: 'Directive',
         component: () => import('@/views/Directive.vue')
+      },
+      {
+        path: 'slot',
+        name: 'DynamicSlot',
+        component: () => import('@/views/DynamicSlot.vue')
       }
     ]
   }

@@ -10,6 +10,7 @@
       <router-link to="/carousel">Carousel</router-link>
       <router-link to="/upload">Upload</router-link>
       <router-link to="/directive">Directive</router-link>
+      <router-link to="/slot">Dynamic Slot Name</router-link>
     </div>
     <router-view></router-view>
   </div>
