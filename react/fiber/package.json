@@ -1,0 +1,19 @@
+{
+  "name": "fiber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel dom.js index.js -d ./dist",
+    "dev": "babel dom.js index.js -d ./dist --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.17.3",
+    "@babel/core": "^7.17.5",
+    "@babel/preset-react": "^7.16.7",
+    "rimraf": "^3.0.2"
+  }
+}
