@@ -17,6 +17,7 @@
     "last 2 versions"
   ],
   "dependencies": {
+    "@antfu/ni": "^0.13.2",
     "@types/babel-traverse": "^6.25.7",
     "async-validator": "^3.5.1",
     "axios": "^0.22.0",
@@ -31,7 +32,7 @@
     "mathjs": "^9.5.1",
     "mitt": "^2.1.0",
     "user-agents": "^1.0.828",
-    "vue": "^3.0.5",
+    "vue": "^3.2.31",
     "vue-router": "^4.0.4"
   },
   "devDependencies": {
@@ -77,6 +78,7 @@
     "progress-bar-webpack-plugin": "^2.1.0",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
+    "shelljs": "^0.8.5",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.0.17",
     "ts-node": "^9.1.1",
