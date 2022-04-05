@@ -1,3 +1,6 @@
+import virtualModule from 'virtual-module';
+console.log("🚀 ~ file: vue.ts ~ line 2 ~ virtualModule", virtualModule)
+
 function defineReactive(obj: any, key: string | number | symbol, value: any) {
   Object.defineProperty(obj, key, {
     enumerable: true,

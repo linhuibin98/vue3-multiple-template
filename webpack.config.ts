@@ -1,11 +1,12 @@
 import { join, resolve } from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { VueLoaderPlugin } from "vue-loader";
-import webpack from "webpack";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import CompressionPlugin from "compression-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import ProgressBarPlugin from "progress-bar-webpack-plugin";
+import unpluginDemo from 'unplugin-demo';
 
 export default {
   mode: "development",
@@ -102,7 +103,7 @@ export default {
     ],
   },
   plugins: [
-    new webpack.ProgressPlugin(),
+    new ProgressBarPlugin(),
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
@@ -115,5 +116,6 @@ export default {
     }),
     // 打包后文件压缩插件
     new CompressionPlugin(),
+    unpluginDemo.webpack(),
   ],
 };

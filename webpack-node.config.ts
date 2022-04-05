@@ -1,6 +1,7 @@
 import { Configuration } from 'webpack';
 import path from "path";
 import ProgressBarPlugin from "progress-bar-webpack-plugin";
+import unpluginDemo from 'unplugin-demo';
 
 export default {
   mode: 'development',
@@ -11,10 +12,11 @@ export default {
   },
   plugins: [
     new ProgressBarPlugin({
-      format: '  build [:bar] :percent (:elapsed seconds)',
+      format: 'build [:bar] :percent (:elapsed seconds)',
       clear: false,
       width: 60,
       total: 100
-    })
+    }),
+    unpluginDemo.webpack()
   ]
 } as Configuration;

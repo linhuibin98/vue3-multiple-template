@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <virtual-module />
     <div class="route">
       <router-link to="/home">Home</router-link>
       <router-link to="/drag">Drag</router-link>
@@ -18,9 +19,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import virtualModule from 'virtual-module';
+console.log("🚀 ~ file: Index.vue ~ line 22 ~ virtualModule", virtualModule)
 
 export default defineComponent({
   name: "Index",
+  components: {
+    virtualModule
+  },
   setup() {
     return {};
   },
