@@ -1,9 +1,7 @@
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import App from './App.vue'
-import './testJsx'
 import { loadingDirective } from "@/direcctives/loading"
-import './a'
 
 import 'element-plus/dist/index.css'
 

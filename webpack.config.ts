@@ -6,7 +6,7 @@ import CompressionPlugin from "compression-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import ProgressBarPlugin from "progress-bar-webpack-plugin";
-import unpluginDemo from 'unplugin-demo';
+import unpluginDemo from '@linhuibin/unplugin-demo';
 
 export default {
   mode: "development",

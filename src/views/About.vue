@@ -10,7 +10,7 @@ import { ref, defineProps } from 'vue'
 const props = defineProps({
   name: {
     type: String,
-    default: '林慧斌'
+    default: '~~~'
   }
 })
 const msg = ref('你好啊')

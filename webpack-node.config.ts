@@ -1,7 +1,7 @@
 import { Configuration } from 'webpack';
 import path from "path";
 import ProgressBarPlugin from "progress-bar-webpack-plugin";
-import unpluginDemo from 'unplugin-demo';
+import unpluginDemo from '@linhuibin/unplugin-demo';
 
 export default {
   mode: 'development',
