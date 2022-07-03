@@ -42,7 +42,7 @@ export default {
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".vue", ".js"],
+    extensions: ["*", ".ts", ".tsx", ".vue", ".js", '.json'],
     alias: {
       "@": resolve("src"),
     },
