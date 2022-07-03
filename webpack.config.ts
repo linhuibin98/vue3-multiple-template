@@ -78,6 +78,7 @@ export default {
         test: /\.js$/,
         // loader: './src/loaders/loader1.js'  // 自定义loader
         loader: "babel-loader",
+        exclude: resolve(__dirname, 'node_modules')
       },
       {
         test: /\.tsx?$/,

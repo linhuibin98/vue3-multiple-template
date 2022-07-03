@@ -2,7 +2,7 @@
   "name": "vue3-multiple-template",
   "packageManager": "pnpm@7.4.0",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.ts",
   "description": "webpack vue3 多页",
   "author": "linhuibin98 <1032352370@qq.com>",
   "license": "MIT",
