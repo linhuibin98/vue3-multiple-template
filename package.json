@@ -9,7 +9,9 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --mode production",
-    "server": "ts-node server.ts"
+    "server": "ts-node server.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "browserslist": [
     "iOS >= 7",
@@ -45,6 +47,7 @@
     "@babel/template": "^7.15.4",
     "@babel/traverse": "^7.15.4",
     "@babel/types": "^7.15.6",
+    "@linhuibin/eslint-config": "^0.0.4",
     "@linhuibin/unplugin-demo": "^1.0.2",
     "@swc/cli": "^0.1.51",
     "@swc/core": "^1.2.105",
@@ -68,7 +71,7 @@
     "browserslist": "^4.17.5",
     "clean-webpack-plugin": "^4.0.0",
     "compression-webpack-plugin": "^9.0.0",
-    "core-js": "^3.21.1",
+    "core-js": "3.23.3",
     "css-loader": "^5.0.2",
     "css-minimizer-webpack-plugin": "^3.1.1",
     "del-cli": "^4.0.1",
