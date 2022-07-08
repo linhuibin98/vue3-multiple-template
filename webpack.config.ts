@@ -49,7 +49,7 @@ export default {
   },
   devServer: {
     compress: false,
-    port: 8080,
+    port: 8081,
     inline: true,
     hot: true,
   },

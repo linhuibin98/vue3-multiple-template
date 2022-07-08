@@ -20,6 +20,7 @@ specifiers:
   '@types/compression-webpack-plugin': ^9.0.0
   '@types/css-minimizer-webpack-plugin': ^3.0.2
   '@types/fs-extra': ^9.0.10
+  '@types/howler': ^2.2.7
   '@types/html-webpack-plugin': ^3.2.4
   '@types/memory-fs': ^0.3.3
   '@types/mini-css-extract-plugin': ^2.4.0
@@ -52,7 +53,9 @@ specifiers:
   express: ^4.17.1
   file-loader: ^6.2.0
   fs-extra: ^9.1.0
+  howler: ^2.2.3
   html-webpack-plugin: ^5.2.0
+  lottie-web: ^5.9.6
   mathjs: ^9.5.1
   memory-fs: ^0.5.0
   mini-css-extract-plugin: ^2.4.3
@@ -90,6 +93,8 @@ dependencies:
   esbuild: registry.npmmirror.com/esbuild/0.13.15
   eslint: registry.npmmirror.com/eslint/8.3.0
   exceljs: registry.npmmirror.com/exceljs/4.3.0
+  howler: registry.npmmirror.com/howler/2.2.3
+  lottie-web: registry.npmmirror.com/lottie-web/5.9.6
   mathjs: registry.npmmirror.com/mathjs/9.5.2
   mitt: registry.nlark.com/mitt/2.1.0
   user-agents: registry.npmmirror.com/user-agents/1.0.845
@@ -114,6 +119,7 @@ devDependencies:
   '@types/compression-webpack-plugin': registry.npmmirror.com/@types/compression-webpack-plugin/9.0.0_gxn2gpgjhtqundd7bs45eb65by
   '@types/css-minimizer-webpack-plugin': registry.npmmirror.com/@types/css-minimizer-webpack-plugin/3.0.2_gxn2gpgjhtqundd7bs45eb65by
   '@types/fs-extra': registry.npmmirror.com/@types/fs-extra/9.0.13
+  '@types/howler': registry.npmmirror.com/@types/howler/2.2.7
   '@types/html-webpack-plugin': registry.npmmirror.com/@types/html-webpack-plugin/3.2.6
   '@types/memory-fs': registry.npmmirror.com/@types/memory-fs/0.3.3
   '@types/mini-css-extract-plugin': registry.npmmirror.com/@types/mini-css-extract-plugin/2.4.0_gxn2gpgjhtqundd7bs45eb65by
@@ -6817,6 +6823,12 @@ packages:
       '@types/node': registry.npmmirror.com/@types/node/16.11.42
     dev: true
 
+  registry.npmmirror.com/@types/howler/2.2.7:
+    resolution: {integrity: sha512-PEZldwZqJJw1PWRTpupyC7ajVTZA8aHd8nB/Y0n6zRZi5u8ktYDntsHj13ltEiBRqWwF06pASxBEvCTxniG8eA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/howler/-/howler-2.2.7.tgz}
+    name: '@types/howler'
+    version: 2.2.7
+    dev: true
+
   registry.npmmirror.com/@types/html-minifier-terser/6.1.0:
     resolution: {integrity: sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/html-minifier-terser/download/@types/html-minifier-terser-6.1.0.tgz}
     name: '@types/html-minifier-terser'
@@ -9974,6 +9986,12 @@ packages:
       lru-cache: registry.npmmirror.com/lru-cache/6.0.0
     dev: true
 
+  registry.npmmirror.com/howler/2.2.3:
+    resolution: {integrity: sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/howler/-/howler-2.2.3.tgz}
+    name: howler
+    version: 2.2.3
+    dev: false
+
   registry.npmmirror.com/html-minifier-terser/6.1.0:
     resolution: {integrity: sha512-YXxSlJBZTP7RS3tWnQw74ooKa6L9b9i9QYXY21eUEvhZ3u9XLfv6OnFsQq6RxkhHygsaUMvYsZRV5rU/OVNZxw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/html-minifier-terser/download/html-minifier-terser-6.1.0.tgz?cache=0&sync_timestamp=1637572917230&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fhtml-minifier-terser%2Fdownload%2Fhtml-minifier-terser-6.1.0.tgz}
     name: html-minifier-terser
@@ -10699,6 +10717,12 @@ packages:
     dependencies:
       js-tokens: registry.npmmirror.com/js-tokens/4.0.0
     dev: true
+
+  registry.npmmirror.com/lottie-web/5.9.6:
+    resolution: {integrity: sha512-JFs7KsHwflugH5qIXBpB4905yC1Sub2MZWtl/elvO/QC6qj1ApqbUZJyjzJseJUtVpgiDaXQLjBlIJGS7UUUXA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lottie-web/-/lottie-web-5.9.6.tgz}
+    name: lottie-web
+    version: 5.9.6
+    dev: false
 
   registry.npmmirror.com/lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lru-cache/-/lru-cache-6.0.0.tgz}
