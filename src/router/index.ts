@@ -59,9 +59,9 @@ export const routes: RouteRecordRaw[] = [
         component: () => import('@/views/DynamicSlot.vue'),
       },
       {
-        path: 'howler',
-        name: 'Howler',
-        component: () => import('@/views/Howler.vue'),
+        path: 'lottie',
+        name: 'Lottie',
+        component: () => import('@/views/Lottie.vue'),
       },
     ],
   },

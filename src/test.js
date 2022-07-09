@@ -3,7 +3,7 @@ const n1 = 1
 const n2 = 2
 const fontSize = '16px'
 
-function add (n1, n2) {
+function add(n1, n2) {
   return n1 + n2
 }
 

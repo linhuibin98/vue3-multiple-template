@@ -15,9 +15,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="index">
-    <VirtualModule />
-    <div class="route">
+  <div class="p-10px index">
+    <VirtualModule class="virtual" />
+    <div class="mt-10px mb-10px py-20px route">
       <router-link to="/home">
         Home
       </router-link>
@@ -48,8 +48,8 @@ export default defineComponent({
       <router-link to="/slot">
         Dynamic Slot Name
       </router-link>
-      <router-link to="/howler">
-        Howler Audio
+      <router-link to="/lottie">
+        Lottie Web
       </router-link>
     </div>
     <router-view />
@@ -59,8 +59,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 .route {
   > a {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+    border: 1px solid deepskyblue;
+    border-radius: 10px;
     & + a {
-      padding-left: 20px;
+      margin-left: 20px;
     }
   }
 }

@@ -1,31 +1,23 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es5",
+    "target": "ES5",
     "strict": true,
     "sourceMap": true,
     "jsx": "preserve",
     "importHelpers": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "module": "CommonJS",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
+    "lib": ["esnext", "dom"],
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["element-plus/global"],
     "resolveJsonModule": true,
     "checkJs": true
   },
   "include": ["src/*", "./*.ts", "test-env.js"],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
