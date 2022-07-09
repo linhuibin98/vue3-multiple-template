@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, markRaw, onMounted, ref, nextTick, reactive } from 'vue'
+import { computed, markRaw, nextTick, onMounted, reactive, ref } from 'vue'
 import type { AnimationItem } from 'lottie-web'
 import lottie from 'lottie-web'
 import { Howl } from 'howler'
@@ -16,8 +16,8 @@ const createAudio = (assetPath) => {
   })
   return Object.assign(howl, {
     setVolume(volume = 1) {
-      howl.volume(volume);
-    }
+      howl.volume(volume)
+    },
   })
 }
 const enum Current {
@@ -34,25 +34,27 @@ const currentAnim = computed<AnimationItem | undefined>(() => {
   return animMap[current.value]
 })
 
-let lastTime = 0, intervalTime = 150
+let lastTime = 0; const intervalTime = 150
 
 const toggleStop = () => {
   if (!currentAnim.value || Date.now() - lastTime < intervalTime) return
-  if (currentAnim.value.isPaused) {
+  if (currentAnim.value.isPaused)
     currentAnim.value.play()
-  } else {
+
+  else
     currentAnim.value.goToAndStop(0)
-  }
+
   lastTime = Date.now()
 }
 
 const togglePause = () => {
   if (!currentAnim.value || Date.now() - lastTime < intervalTime) return
-  if (currentAnim.value.isPaused) {
+  if (currentAnim.value.isPaused)
     currentAnim.value.play()
-  } else {
+
+  else
     currentAnim.value.pause()
-  }
+
   lastTime = Date.now()
 }
 
@@ -76,7 +78,7 @@ const createAnim = (opts) => {
     loop: false,
     renderer: 'svg',
     autoplay: false,
-    assetsPath: 'http://127.0.0.1:3001/',
+    assetsPath: '/asset/',
     audioFactory: createAudio,
     ...opts,
   })
@@ -102,8 +104,7 @@ onMounted(() => {
   }))
 })
 
-
-const remoteAnim = ref(null);
+const remoteAnim = ref(null)
 
 const onClickRemotePlay = (e) => {
   if (!remoteAnim.value) return
@@ -141,8 +142,10 @@ onMounted(() => {
       </button>
     </div>
     <div class="mt-10px relative">
-      <div id="remote" class="w-full h-500px"></div>
-      <button class="absolute top-1/2 left-1/2 py-10px px-20px w-80px h-40px border rounded-10px border-green-800 transform -translate-x-1/2 -translate-y-1/2 text-block-200" @click="onClickRemotePlay">播放</button>
+      <div id="remote" class="w-full h-500px" />
+      <button class="absolute top-1/2 left-1/2 py-10px px-20px w-80px h-40px border rounded-10px border-green-800 transform -translate-x-1/2 -translate-y-1/2 text-block-200" @click="onClickRemotePlay">
+        播放
+      </button>
     </div>
   </div>
 </template>

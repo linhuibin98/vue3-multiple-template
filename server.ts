@@ -11,5 +11,6 @@ app.use((req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log('Listen as http://localhost:' + PORT)
-});
+  // eslint-disable-next-line no-console
+  console.log(`Listen as http://localhost:${PORT}`)
+})
