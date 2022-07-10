@@ -2,9 +2,6 @@ import { join, resolve } from 'path'
 
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { VueLoaderPlugin } from 'vue-loader'
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import unpluginDemo from '@linhuibin/unplugin-demo'
 import WindiCSSWebpackPlugin from 'windicss-webpack-plugin'
 import ProgressBarWebpackPlugin from 'webpackbar'
@@ -12,55 +9,33 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 export default {
-  mode: 'production',
+  mode: 'development',
   entry: './src/index.ts',
   output: {
     path: join(__dirname, 'dist'),
-    filename: '[name].[contenthash:8].js',
-    // 增加chunkFilename
-    chunkFilename: '[name].[contenthash:8].js',
+    filename: '[name].js',
     publicPath: '/',
   },
-  devtool: 'source-map',
+  devtool: 'eval-cheap-module-source-map',
+  cache: {
+    type: 'filesystem', // filesystem 基于文件系统缓存, memory 基于内存的临时缓存
+  },
   resolve: {
     extensions: ['*', '.ts', '.tsx', '.vue', '.js', '.json', '.cjs', '.mjs'],
     alias: {
       '@': resolve('src'),
     },
   },
-  optimization: {
-    runtimeChunk: {
-      name: (entrypoint: { name: string }) => `runtime~${entrypoint.name}`,
-    },
-    emitOnErrors: true,
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-        default: {
-          chunks: 'initial',
-          minChunks: 2,
-        },
-      },
-    },
-    minimize: true,
-    minimizer: [
-      // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
-      // `...`,
-      new CssMinimizerPlugin({
-        parallel: true,
-      }),
-      '...',
-    ],
+  devServer: {
+    compress: false,
+    port: 8081,
+    inline: true,
+    hot: true,
   },
   module: {
     rules: [
       {
         test: /\.(png|jpg|gif|svg|svga|ico|mp3|mp4|woff|ttf|eot|woff2)$/i,
-        // type: 'asset/resource', // 输出链接
         use: [
           {
             loader: 'url-loader',
@@ -68,9 +43,8 @@ export default {
               limit: 2 * 1024, // 小于2k的文件，直接使用 Base64 编码进行处理
               fallback: 'file-loader',
               esModule: true,
-              // context: process.cwd(),
-              outputPath: 'asset',
-              name: '[folder]/[name]~[contenthash:8].[ext]',
+              outputPath: 'dist/asset/',
+              name: '[folder]/[name].[ext]',
             },
           },
         ],
@@ -99,7 +73,7 @@ export default {
       {
         test: /\.(css|scss|sass)$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
+          'style-loader',
           'css-loader',
           'sass-loader',
           {
@@ -116,12 +90,7 @@ export default {
   },
   plugins: [
     new ProgressBarWebpackPlugin(),
-    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[name].[contenthash].css',
-    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: resolve(__dirname, 'public/index.html'),

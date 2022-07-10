@@ -78,7 +78,7 @@ const createAnim = (opts) => {
     loop: false,
     renderer: 'svg',
     autoplay: false,
-    assetsPath: '/asset/',
+    assetsPath: '/asset/lottie/',
     audioFactory: createAudio,
     ...opts,
   })
