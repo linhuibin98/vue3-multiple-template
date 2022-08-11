@@ -1,18 +1,6 @@
-<template>
-  <div>
-    <p>a: {{ obj.a.c }}</p>
-    <p ref="root">double c: {{ obj.a.c }}</p>
-    <input ref="inputRef1" type="range" min="0" max="255" />
-    <input ref="inputRef2" type="range" min="0" max="255" />
-    <input ref="inputRef3" type="range" min="0" max="255" />
-  </div>
-  <div ref="bg" class="bg" :style="`width: 150px; height: 150px; background-color: rgb(${obj.r}, ${obj.g}, ${obj.b});`"></div>
-  <button @click="handler.onClick">+1</button>
-</template>
-
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-import { reactive, effect } from '@/utils/proxy'
+import { defineComponent, onMounted, ref } from 'vue'
+import { effect, reactive } from '@/utils/proxy'
 
 export default defineComponent({
   setup() {
@@ -20,14 +8,14 @@ export default defineComponent({
     const bg = ref({} as HTMLDivElement)
     const inputRef1 = ref({} as HTMLInputElement)
     const inputRef2 = ref({} as HTMLInputElement)
-    const inputRef3= ref({} as HTMLInputElement)
+    const inputRef3 = ref({} as HTMLInputElement)
     const obj = reactive({
       a: {
-        c: 6
+        c: 6,
       },
       r: 100,
       g: 100,
-      b: 100
+      b: 100,
     })
     window.obj = obj
     effect(() => {
@@ -38,7 +26,7 @@ export default defineComponent({
     const handler = {
       onClick: () => {
         obj.a.c += 1
-      }
+      },
     }
 
     effect(() => inputRef1.value.value = obj.r)
@@ -47,7 +35,7 @@ export default defineComponent({
 
     effect(() => {
       const bgColor = `rgb(${obj.r}, ${obj.g}, ${obj.b})`
-      bg.value.style?.backgroundColor = bgColor
+      bg.value.style.backgroundColor = bgColor
     })
 
     onMounted(() => {
@@ -69,11 +57,27 @@ export default defineComponent({
       inputRef1,
       inputRef2,
       inputRef3,
-      bg
-    };
+      bg,
+    }
   },
-});
+})
 </script>
+
+<template>
+  <div>
+    <p>a: {{ obj.a.c }}</p>
+    <p ref="root">
+      double c: {{ obj.a.c }}
+    </p>
+    <input ref="inputRef1" type="range" min="0" max="255">
+    <input ref="inputRef2" type="range" min="0" max="255">
+    <input ref="inputRef3" type="range" min="0" max="255">
+  </div>
+  <div ref="bg" class="bg" :style="`width: 150px; height: 150px; background-color: rgb(${obj.r}, ${obj.g}, ${obj.b});`" />
+  <button @click="handler.onClick">
+    +1
+  </button>
+</template>
 
 <style lang="scss" scoped>
 </style>

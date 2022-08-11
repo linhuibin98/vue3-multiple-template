@@ -1,23 +1,34 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "target": "ES5",
-    "strict": true,
-    "sourceMap": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "Node",
-    "module": "CommonJS",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "lib": ["esnext", "dom"],
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "resolveJsonModule": true,
-    "checkJs": true
-  },
-  "include": ["src/*", "./*.ts", "test-env.js"],
-  "exclude": ["node_modules"]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "esnext",
+		"strict": true,
+		"sourceMap": true,
+		"jsx": "preserve",
+		"importHelpers": true,
+		"moduleResolution": "Node",
+		"module": "CommonJS",
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"lib": [
+			"esnext",
+			"dom"
+		],
+		"paths": {
+			"@/*": [
+				"src/*"
+			]
+		},
+		"resolveJsonModule": true,
+		"checkJs": true
+	},
+	"include": [
+		"src/*",
+		"./*.ts",
+		"test-env.js"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }
