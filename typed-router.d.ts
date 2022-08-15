@@ -34,6 +34,7 @@ declare module '@vue-router/routes' {
     '/Carousel': RouteRecordInfo<'/Carousel', '/Carousel', Record<never, never>, Record<never, never>>,
     '/Directive': RouteRecordInfo<'/Directive', '/Directive', Record<never, never>, Record<never, never>>,
     '/DynamicSlot': RouteRecordInfo<'/DynamicSlot', '/DynamicSlot', Record<never, never>, Record<never, never>>,
+    '/Foo': RouteRecordInfo<'/Foo', '/Foo', Record<never, never>, Record<never, never>>,
     '/Gesture': RouteRecordInfo<'/Gesture', '/Gesture', Record<never, never>, Record<never, never>>,
     '/Home': RouteRecordInfo<'/Home', '/Home', Record<never, never>, Record<never, never>>,
     '/Index': RouteRecordInfo<'/Index', '/Index', Record<never, never>, Record<never, never>>,

@@ -10,6 +10,7 @@ import WindiCSSWebpackPlugin from 'windicss-webpack-plugin'
 import ProgressBarWebpackPlugin from 'webpackbar'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import VueRouterPlugin from 'unplugin-vue-router/webpack'
 
 export default {
   mode: 'production',
@@ -137,6 +138,10 @@ export default {
           force: true,
         },
       ],
+    }),
+    VueRouterPlugin({
+      routesFolder: 'src/views',
+      // logs: true
     }),
   ],
 }
