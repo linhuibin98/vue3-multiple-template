@@ -16,7 +16,8 @@
       "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
-    "checkJs": true
+    "checkJs": true,
+    "types": ["unplugin-icons/types/vue"]
   },
   "include": ["src/*", "./*.ts", "test-env.js"],
   "exclude": ["node_modules"]

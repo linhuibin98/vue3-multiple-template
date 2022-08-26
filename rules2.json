@@ -1,0 +1,156 @@
+[
+  {
+    "loader": "E:\\projects\\vue3-multiple-template\\node_modules\\.pnpm\\vue-loader@17.0.0_webpack@5.64.3\\node_modules\\vue-loader\\dist\\pitcher.js"
+  },
+  { "use": [{ "loader": "babel-loader" }] },
+  {
+    "use": [
+      { "loader": "babel-loader" },
+      {
+        "loader": "ts-loader",
+        "options": { "transpileOnly": true, "appendTsSuffixTo": [{}] },
+        "ident": "clonedRuleSet-3.use[1]"
+      }
+    ]
+  },
+  {
+    "loader": "E:\\projects\\vue3-multiple-template\\node_modules\\.pnpm\\vue-loader@17.0.0_webpack@5.64.3\\node_modules\\vue-loader\\dist\\templateLoader.js",
+    "options": {}
+  },
+  {
+    "use": [
+      {
+        "loader": "url-loader",
+        "options": {
+          "limit": 2048,
+          "fallback": "file-loader",
+          "esModule": true,
+          "outputPath": "dist/asset/",
+          "name": "[folder]/[name].[ext]"
+        },
+        "ident": "clonedRuleSet-1.use[0]"
+      }
+    ]
+  },
+  { "use": [{ "loader": "babel-loader" }] },
+  {
+    "use": [
+      { "loader": "babel-loader" },
+      {
+        "loader": "ts-loader",
+        "options": { "transpileOnly": true, "appendTsSuffixTo": [{}] },
+        "ident": "clonedRuleSet-3.use[1]"
+      }
+    ]
+  },
+  {
+    "use": [
+      { "loader": "style-loader" },
+      { "loader": "css-loader" },
+      { "loader": "sass-loader" },
+      {
+        "loader": "postcss-loader",
+        "options": { "postcssOptions": { "plugins": [null] } },
+        "ident": "clonedRuleSet-4.use[3]"
+      }
+    ]
+  },
+  {
+    "test": {},
+    "use": [
+      {
+        "loader": "url-loader",
+        "options": {
+          "limit": 2048,
+          "fallback": "file-loader",
+          "esModule": true,
+          "outputPath": "dist/asset/",
+          "name": "[folder]/[name].[ext]"
+        },
+        "ident": "clonedRuleSet-1.use[0]"
+      }
+    ]
+  },
+  { "test": {}, "use": [{ "loader": "vue-loader", "options": {} }] },
+  { "test": {}, "use": [{ "loader": "babel-loader" }] },
+  {
+    "test": {},
+    "use": [
+      { "loader": "babel-loader" },
+      {
+        "loader": "ts-loader",
+        "options": { "transpileOnly": true, "appendTsSuffixTo": [{}] },
+        "ident": "clonedRuleSet-3.use[1]"
+      }
+    ]
+  },
+  {
+    "test": {},
+    "use": [
+      { "loader": "style-loader" },
+      { "loader": "css-loader" },
+      { "loader": "sass-loader" },
+      {
+        "loader": "postcss-loader",
+        "options": { "postcssOptions": { "plugins": [null] } },
+        "ident": "clonedRuleSet-4.use[3]"
+      }
+    ]
+  },
+  {
+    "use": [
+      {
+        "loader": "E:\\projects\\vue3-multiple-template\\loaders\\unplugin-load.js",
+        "options": { "unpluginName": "unplugin-demo" }
+      }
+    ]
+  },
+  {
+    "resourceQuery": {},
+    "enforce": "post",
+    "use": [
+      {
+        "loader": "E:/projects/vue3-multiple-template/node_modules/.pnpm/windicss-webpack-plugin@1.7.3/node_modules/windicss-webpack-plugin/dist/loaders/windicss-style-pitcher.cjs"
+      }
+    ]
+  },
+  {
+    "use": [
+      {
+        "loader": "E:/projects/vue3-multiple-template/node_modules/.pnpm/windicss-webpack-plugin@1.7.3/node_modules/windicss-webpack-plugin/dist/loaders/windicss-template.cjs"
+      }
+    ]
+  },
+  {
+    "use": [
+      {
+        "loader": "E:/projects/vue3-multiple-template/node_modules/.pnpm/windicss-webpack-plugin@1.7.3/node_modules/windicss-webpack-plugin/dist/loaders/windicss-css.cjs"
+      }
+    ]
+  },
+  {
+    "enforce": "pre",
+    "use": [
+      {
+        "loader": "E:/projects/vue3-multiple-template/node_modules/.pnpm/windicss-webpack-plugin@1.7.3/node_modules/windicss-webpack-plugin/dist/loaders/virtual-module.cjs"
+      }
+    ]
+  },
+  {
+    "enforce": "pre",
+    "use": [
+      {
+        "loader": "E:/projects/vue3-multiple-template/node_modules/.pnpm/windicss-webpack-plugin@1.7.3/node_modules/windicss-webpack-plugin/dist/loaders/dev-tools.cjs"
+      }
+    ]
+  },
+  {
+    "enforce": "pre",
+    "use": [
+      {
+        "loader": "E:\\projects\\vue3-multiple-template\\loaders\\unplugin-load.js",
+        "options": { "unpluginName": "unplugin-icons" }
+      }
+    ]
+  }
+]

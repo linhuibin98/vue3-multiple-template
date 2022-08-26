@@ -1,4 +1,5 @@
 import { join, resolve } from 'path'
+import fs from 'fs'
 
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { VueLoaderPlugin } from 'vue-loader'
@@ -7,6 +8,8 @@ import WindiCSSWebpackPlugin from 'windicss-webpack-plugin'
 import ProgressBarWebpackPlugin from 'webpackbar'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
+import esr from 'escape-string-regexp'
+import IconsPlugin from 'unplugin-icons/webpack'
 
 export default {
   mode: 'development',
@@ -19,6 +22,34 @@ export default {
   devtool: 'eval-cheap-module-source-map',
   cache: {
     type: 'filesystem', // filesystem 基于文件系统缓存, memory 基于内存的临时缓存
+    buildDependencies: { // 提供额外依赖，用于判断缓存是否失效
+      config: [
+        __filename,
+        // join(env.mfexBuildPath, 'package.json'),
+        join(__dirname, 'pnpm-lock.yaml'),
+        // join(env.context, 'build.config.js')
+      ],
+    },
+    name: 'webpack-internal-cache',
+    cacheLocation: join(__dirname, './node_modules/.cache/webpack-cache-dev'),
+    managedPaths: [
+      join(__dirname, 'node_modules'),
+      // new RegExp(esr('?!_virtual_')),
+      // new RegExp(esr(join(__dirname, 'node_modules'))),
+      // new RegExp(esr(join(__dirname, 'node_modules/(?!@mfex)'))),
+      // join(env.mfexBuildPath, 'node_modules')
+    ],
+    idleTimeoutForInitialStore: 0,
+    // version: , // 可用于缓存是否失效
+  },
+  snapshot: {
+    managedPaths: [
+      join(__dirname, 'node_modules'),
+      //
+      // new RegExp(esr(join(__dirname, 'node_modules'))),
+      // new RegExp(esr(join(__dirname, 'node_modules/(?!@mfex)'))),
+      // join(env.mfexBuildPath, 'node_modules')
+    ],
   },
   resolve: {
     extensions: ['*', '.ts', '.tsx', '.vue', '.js', '.json', '.cjs', '.mjs'],
@@ -107,5 +138,26 @@ export default {
         },
       ],
     }),
+    IconsPlugin({
+      compiler: 'vue3',
+    }),
+    {
+      name: 'log-config',
+      apply(compiler: any) {
+        const rules = compiler.options.module.rules
+        rules.forEach((rule: any) => {
+          if (Array.isArray(rule.use)) {
+            rule.use.forEach((l: any) => {
+              if (l.options && l.options.unpluginName)
+                l.loader = require.resolve('./loaders/unplugin-load.js')
+            })
+          }
+          else if (typeof rule.use === 'string' && rule.options && rule.options.unpluginName) {
+            rule.use = require.resolve('./loaders/unplugin-load.js')
+          }
+        })
+        // fs.writeFileSync('rules2.json', JSON.stringify(compiler.options.module.rules), 'utf8')
+      },
+    },
   ],
 }
