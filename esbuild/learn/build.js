@@ -1,17 +1,17 @@
-const { build } = require('esbuild');
+const { build } = require('esbuild')
 
 async function dev() {
-    await build({
-        entryPoints: ['index.js'],
-        bundle: true,
-        outfile: 'bundle.js',
-        watch: true
-    });
+  await build({
+    entryPoints: ['index.js'],
+    bundle: true,
+    outfile: 'bundle.js',
+    watch: true,
+  })
 }
 
 async function prod() {
 
 }
 
-dev();
- 
+dev()
+

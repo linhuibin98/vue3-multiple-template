@@ -1,6 +1,5 @@
-
 const add = (a, b) => {
-    return a + b;
+  return a + b
 }
 
-console.log('add', add(1, 2));
+console.log('add', add(1, 2))
